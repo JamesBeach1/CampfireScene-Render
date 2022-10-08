@@ -4,12 +4,10 @@
 
 ### Tree
 
-### Bench
-
-### Tree Stump
+### Log
 
 ### Campfire
 
-### Tent
+### Woodcutters Axe
 
 ## Render Method
