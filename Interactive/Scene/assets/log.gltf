@@ -1,0 +1,301 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v3.3.27",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Log"
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "name" : "Bark",
+            "normalTexture" : {
+                "index" : 0
+            },
+            "pbrMetallicRoughness" : {
+                "baseColorTexture" : {
+                    "index" : 1
+                },
+                "metallicFactor" : 0,
+                "metallicRoughnessTexture" : {
+                    "index" : 2
+                }
+            }
+        },
+        {
+            "doubleSided" : true,
+            "name" : "Wood",
+            "pbrMetallicRoughness" : {
+                "baseColorTexture" : {
+                    "index" : 3
+                },
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.5
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Cylinder",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TANGENT" : 2,
+                        "TEXCOORD_0" : 3,
+                        "COLOR_0" : 4
+                    },
+                    "indices" : 5,
+                    "material" : 0
+                },
+                {
+                    "attributes" : {
+                        "POSITION" : 6,
+                        "NORMAL" : 7,
+                        "TANGENT" : 8,
+                        "TEXCOORD_0" : 9,
+                        "COLOR_0" : 10
+                    },
+                    "indices" : 11,
+                    "material" : 1
+                }
+            ]
+        }
+    ],
+    "textures" : [
+        {
+            "sampler" : 0,
+            "source" : 0
+        },
+        {
+            "sampler" : 0,
+            "source" : 1
+        },
+        {
+            "sampler" : 0,
+            "source" : 2
+        },
+        {
+            "sampler" : 0,
+            "source" : 3
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/jpeg",
+            "name" : "Bark001_1K_NormalDX",
+            "uri" : "logTextures/Bark001_1K_NormalDX.jpg"
+        },
+        {
+            "mimeType" : "image/jpeg",
+            "name" : "Bark001_1K_Color",
+            "uri" : "logTextures/Bark001_1K_Color.jpg"
+        },
+        {
+            "mimeType" : "image/jpeg",
+            "name" : "Bark001_1K_Roughness",
+            "uri" : "logTextures/Bark001_1K_Roughness.jpg"
+        },
+        {
+            "mimeType" : "image/jpeg",
+            "name" : "TreeEnd002_1K_Color",
+            "uri" : "logTextures/TreeEnd002_1K_Color.jpg"
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 188338,
+            "max" : [
+                1.076520562171936,
+                2.5186285972595215,
+                1.3713337182998657
+            ],
+            "min" : [
+                -1.1330245733261108,
+                -0.07815825939178467,
+                -5.690633296966553
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 188338,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 188338,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5126,
+            "count" : 188338,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 4,
+            "componentType" : 5123,
+            "count" : 188338,
+            "normalized" : true,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 5,
+            "componentType" : 5125,
+            "count" : 282570,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 6,
+            "componentType" : 5126,
+            "count" : 16532,
+            "max" : [
+                0.9296690225601196,
+                2.005542278289795,
+                1.1694648265838623
+            ],
+            "min" : [
+                -0.9024229645729065,
+                0.10896939039230347,
+                -5.66924524307251
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 7,
+            "componentType" : 5126,
+            "count" : 16532,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 8,
+            "componentType" : 5126,
+            "count" : 16532,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 9,
+            "componentType" : 5126,
+            "count" : 16532,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 10,
+            "componentType" : 5123,
+            "count" : 16532,
+            "normalized" : true,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 11,
+            "componentType" : 5123,
+            "count" : 25014,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 2260056,
+            "byteOffset" : 0,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 2260056,
+            "byteOffset" : 2260056,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 3013408,
+            "byteOffset" : 4520112,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 1506704,
+            "byteOffset" : 7533520,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 1506704,
+            "byteOffset" : 9040224,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 1130280,
+            "byteOffset" : 10546928,
+            "target" : 34963
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 198384,
+            "byteOffset" : 11677208,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 198384,
+            "byteOffset" : 11875592,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 264512,
+            "byteOffset" : 12073976,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 132256,
+            "byteOffset" : 12338488,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 132256,
+            "byteOffset" : 12470744,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 50028,
+            "byteOffset" : 12603000,
+            "target" : 34963
+        }
+    ],
+    "samplers" : [
+        {
+            "magFilter" : 9729,
+            "minFilter" : 9987
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 12653028,
+            "uri" : "log.bin"
+        }
+    ]
+}
