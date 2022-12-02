@@ -26,6 +26,8 @@ using namespace std;
 #define GLM_ENABLE_EXPERIMENTAL	 // Enable all functions include non LTS
 #include <glm/glm.hpp>			 // Add helper maths library - GLM 0.9.9.9 - https://github.com/g-truc/glm - for example variables vec3, mat and operators.
 #include <glm/gtx/transform.hpp> // Help us with transforms
+#include <glm/gtx/rotate_vector.hpp>
+#include <glm/gtx/vector_angle.hpp>
 using namespace glm;
  
 //#include <tinygltf/tiny_gltf.h> // Model loading library - tiny gltf - https://github.com/syoyo/tinygltf
@@ -80,6 +82,9 @@ mat4 projMatrix;							 		// Our Projection Matrix
 vec3 cameraPosition = vec3(0.0f, 0.0f, 5.0f);		// Where is our camera
 vec3 cameraFront = vec3(0.0f, 0.0f, -1.0f);			// Camera front vector
 vec3 cameraUp = vec3(0.0f, 1.0f, 0.0f);				// Camera up vector
+float cameraSpeed = 0.05f;							// Camera movement speed
+float cameraRotateSensitivity = 100.0f;				// Camera Rotation Speed
+bool mouseHeld = false;								// Is LMB held down
 auto aspect = (float)windowWidth / (float)windowHeight;	// Window aspect ration
 auto fovy = 45.0f;									// Field of view (y axis)
 bool keyStatus[1024];								// Track key strokes
@@ -234,7 +239,7 @@ void startup()
 	cout << "RENDERER: " << (char *)glGetString(GL_RENDERER) << endl;	
 
 	cout << endl << "Loading content..." << endl;	
-	content.LoadGLTF("assets/axe.gltf");
+	content.LoadGLTF("assets/dog.gltf");
 
 	pipeline.CreatePipeline();
 	pipeline.LoadShaders("shaders/vs_model.glsl", "shaders/fs_model.glsl");
@@ -261,12 +266,58 @@ void startup()
 
 void update()
 {
-	if (keyStatus[GLFW_KEY_LEFT]) modelRotation.y += 0.05f;
-	if (keyStatus[GLFW_KEY_RIGHT]) modelRotation.y -= 0.05f;
-	if (keyStatus[GLFW_KEY_UP]) modelRotation.x += 0.05f;
-	if (keyStatus[GLFW_KEY_DOWN]) modelRotation.x -= 0.05f;
-	if (keyStatus[GLFW_KEY_W]) modelPosition.z += 0.10f;
-	if (keyStatus[GLFW_KEY_S]) modelPosition.z -= 0.10f;
+
+	// camera movement controls
+	if (keyStatus[GLFW_KEY_W]) cameraPosition += cameraSpeed * cameraFront;
+	if (keyStatus[GLFW_KEY_S]) cameraPosition -= cameraSpeed * cameraFront;
+	if (keyStatus[GLFW_KEY_A]) cameraPosition -= cameraSpeed * glm::normalize(glm::cross(cameraFront, cameraUp));
+	if (keyStatus[GLFW_KEY_D]) cameraPosition += cameraSpeed * glm::normalize(glm::cross(cameraFront, cameraUp));;
+	if (keyStatus[GLFW_KEY_SPACE]) cameraPosition.y += cameraSpeed;
+	if (keyStatus[GLFW_KEY_LEFT_CONTROL]) cameraPosition.y -= cameraSpeed;
+
+	// camera rotation controls
+	// https://learnopengl.com/Getting-started/Camera
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+	{
+		// if the mouse isn't already held, set cursor position to center of screen to prevent jerky motion
+		if(!mouseHeld){
+			glfwSetCursorPos(window, (windowWidth / 2), (windowHeight / 2));
+			mouseHeld = true;
+		}
+
+		// hide cursor while LMB is down
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+		// fetch mouse position on screen
+		double mouseX;
+		double mouseY;
+		glfwGetCursorPos(window, &mouseX, &mouseY);
+
+		// calculate the offset position of the cursor from the center of the screen, detects direction of mouse movement
+		float xOffset = cameraRotateSensitivity * (float)(mouseY - (windowHeight / 2)) / windowHeight;
+		float yOffset = cameraRotateSensitivity * (float)(mouseX - (windowWidth / 2)) / windowWidth;
+
+		// calculate vertical camera rotation
+		glm::vec3 frontVector = glm::rotate(cameraFront, glm::radians(-xOffset), glm::normalize(glm::cross(cameraFront, cameraUp)));
+
+		// calculate pitch and ensure it is <= 89 degrees, prevents camera from being able to flip > 180 degrees
+		if (abs(glm::angle(frontVector, cameraUp) - glm::radians(90.0f)) <= glm::radians(89.0f))
+		{
+			// apply vertical rotation
+			cameraFront = frontVector;
+		}
+
+		// apply horizontal rotation
+		cameraFront = glm::rotate(cameraFront, glm::radians(-yOffset), cameraUp);
+
+		// reset cursor to center of screen
+		glfwSetCursorPos(window, (windowWidth / 2), (windowHeight / 2));
+	}
+	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE)
+	{
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		mouseHeld = false;
+	}
 
 	if (keyStatus[GLFW_KEY_R]) pipeline.ReloadShaders();
 
