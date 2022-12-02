@@ -15,7 +15,30 @@
     "nodes" : [
         {
             "mesh" : 0,
-            "name" : "Axe"
+            "name" : "Cube.001",
+            "translation" : [
+                0.006486714351922274,
+                4.386717319488525,
+                0.027748584747314453
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "name" : "RoughMetal",
+            "normalTexture" : {
+                "index" : 0
+            },
+            "pbrMetallicRoughness" : {
+                "baseColorTexture" : {
+                    "index" : 1
+                },
+                "metallicFactor" : 0,
+                "metallicRoughnessTexture" : {
+                    "index" : 2
+                }
+            }
         }
     ],
     "meshes" : [
@@ -24,94 +47,118 @@
             "primitives" : [
                 {
                     "attributes" : {
-                        "POSITION" : 0
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
                     },
-                    "indices" : 1
-                },
-                {
-                    "attributes" : {
-                        "POSITION" : 2
-                    },
-                    "indices" : 3
+                    "indices" : 3,
+                    "material" : 0
                 }
             ]
+        }
+    ],
+    "textures" : [
+        {
+            "sampler" : 0,
+            "source" : 0
+        },
+        {
+            "sampler" : 0,
+            "source" : 1
+        },
+        {
+            "sampler" : 0,
+            "source" : 2
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/jpeg",
+            "name" : "Metal010_1K_NormalDX",
+            "uri" : "textures/Metal010_1K_NormalDX.jpg"
+        },
+        {
+            "mimeType" : "image/jpeg",
+            "name" : "Metal010_1K_Color",
+            "uri" : "textures/Metal010_1K_Color.jpg"
+        },
+        {
+            "mimeType" : "image/png",
+            "name" : "Metal010_1K_Roughness",
+            "uri" : "textures/Metal010_1K_Roughness.png"
         }
     ],
     "accessors" : [
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 224,
+            "count" : 1438,
             "max" : [
-                0.15953075885772705,
-                5.370336532592773,
-                0.8911493420600891
+                0.15304404497146606,
+                0.983618974685669,
+                0.8634008169174194
             ],
             "min" : [
-                -0.09333407878875732,
-                4.235852241516113,
-                -0.7566524744033813
+                -0.09982079267501831,
+                -4.024104118347168,
+                -0.784400999546051
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 1,
-            "componentType" : 5123,
-            "count" : 1326,
-            "type" : "SCALAR"
+            "componentType" : 5126,
+            "count" : 1438,
+            "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 184,
-            "max" : [
-                0.1528414487838745,
-                5.189271926879883,
-                -0.09293591231107712
-            ],
-            "min" : [
-                -0.08740061521530151,
-                0.3626132011413574,
-                -0.7055297493934631
-            ],
-            "type" : "VEC3"
+            "count" : 1438,
+            "type" : "VEC2"
         },
         {
             "bufferView" : 3,
             "componentType" : 5123,
-            "count" : 1092,
+            "count" : 2418,
             "type" : "SCALAR"
         }
     ],
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 2688,
+            "byteLength" : 17256,
             "byteOffset" : 0,
             "target" : 34962
         },
         {
             "buffer" : 0,
-            "byteLength" : 2652,
-            "byteOffset" : 2688,
-            "target" : 34963
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 2208,
-            "byteOffset" : 5340,
+            "byteLength" : 17256,
+            "byteOffset" : 17256,
             "target" : 34962
         },
         {
             "buffer" : 0,
-            "byteLength" : 2184,
-            "byteOffset" : 7548,
+            "byteLength" : 11504,
+            "byteOffset" : 34512,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 4836,
+            "byteOffset" : 46016,
             "target" : 34963
+        }
+    ],
+    "samplers" : [
+        {
+            "magFilter" : 9729,
+            "minFilter" : 9987
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 9732,
+            "byteLength" : 50852,
             "uri" : "axe.bin"
         }
     ]
