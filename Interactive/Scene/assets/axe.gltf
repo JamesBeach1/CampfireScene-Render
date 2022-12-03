@@ -15,7 +15,7 @@
     "nodes" : [
         {
             "mesh" : 0,
-            "name" : "Cube.001",
+            "name" : "Axe",
             "translation" : [
                 0.006486714351922274,
                 4.386717319488525,
@@ -26,18 +26,13 @@
     "materials" : [
         {
             "doubleSided" : true,
-            "name" : "RoughMetal",
-            "normalTexture" : {
-                "index" : 0
-            },
+            "name" : "Material",
             "pbrMetallicRoughness" : {
                 "baseColorTexture" : {
-                    "index" : 1
+                    "index" : 0
                 },
                 "metallicFactor" : 0,
-                "metallicRoughnessTexture" : {
-                    "index" : 2
-                }
+                "roughnessFactor" : 0.5
             }
         }
     ],
@@ -61,31 +56,13 @@
         {
             "sampler" : 0,
             "source" : 0
-        },
-        {
-            "sampler" : 0,
-            "source" : 1
-        },
-        {
-            "sampler" : 0,
-            "source" : 2
         }
     ],
     "images" : [
         {
-            "mimeType" : "image/jpeg",
-            "name" : "Metal010_1K_NormalDX",
-            "uri" : "textures/Metal010_1K_NormalDX.jpg"
-        },
-        {
-            "mimeType" : "image/jpeg",
-            "name" : "Metal010_1K_Color",
-            "uri" : "textures/Metal010_1K_Color.jpg"
-        },
-        {
             "mimeType" : "image/png",
-            "name" : "Metal010_1K_Roughness",
-            "uri" : "textures/Metal010_1K_Roughness.png"
+            "name" : "axebake",
+            "uri" : "textures/axebake.png"
         }
     ],
     "accessors" : [

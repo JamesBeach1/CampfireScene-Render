@@ -100,7 +100,7 @@ void Content::BindMesh(map<int, GLuint> &vbos, Model &model, Mesh &mesh)
 		if (model.textures.size() > 0)
 		{
 			// fixme: Use material's baseColor
-			Texture &tex = model.textures[1];
+			Texture &tex = model.textures[0];
 
 			if (tex.source > -1)
 			{

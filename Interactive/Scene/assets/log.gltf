@@ -15,24 +15,19 @@
     "nodes" : [
         {
             "mesh" : 0,
-            "name" : "Cylinder"
+            "name" : "Log"
         }
     ],
     "materials" : [
         {
             "doubleSided" : true,
-            "name" : "Bark",
-            "normalTexture" : {
-                "index" : 0
-            },
+            "name" : "Material",
             "pbrMetallicRoughness" : {
                 "baseColorTexture" : {
-                    "index" : 1
+                    "index" : 0
                 },
                 "metallicFactor" : 0,
-                "metallicRoughnessTexture" : {
-                    "index" : 2
-                }
+                "roughnessFactor" : 0.5
             }
         }
     ],
@@ -58,38 +53,20 @@
         {
             "sampler" : 0,
             "source" : 0
-        },
-        {
-            "sampler" : 0,
-            "source" : 1
-        },
-        {
-            "sampler" : 0,
-            "source" : 2
         }
     ],
     "images" : [
         {
-            "mimeType" : "image/jpeg",
-            "name" : "Bark001_1K_NormalDX",
-            "uri" : "textures/Bark001_1K_NormalDX.jpg"
-        },
-        {
-            "mimeType" : "image/jpeg",
-            "name" : "Bark001_1K_Color",
-            "uri" : "textures/Bark001_1K_Color.jpg"
-        },
-        {
             "mimeType" : "image/png",
-            "name" : "Bark001_1K_Roughness",
-            "uri" : "textures/Bark001_1K_Roughness.png"
+            "name" : "logbake",
+            "uri" : "textures/logbake.png"
         }
     ],
     "accessors" : [
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 204856,
+            "count" : 204864,
             "max" : [
                 1.076520562171936,
                 2.5186281204223633,
@@ -105,25 +82,25 @@
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 204856,
+            "count" : 204864,
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 204856,
+            "count" : 204864,
             "type" : "VEC4"
         },
         {
             "bufferView" : 3,
             "componentType" : 5126,
-            "count" : 204856,
+            "count" : 204864,
             "type" : "VEC2"
         },
         {
             "bufferView" : 4,
             "componentType" : 5123,
-            "count" : 204856,
+            "count" : 204864,
             "normalized" : true,
             "type" : "VEC4"
         },
@@ -137,38 +114,38 @@
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 2458272,
+            "byteLength" : 2458368,
             "byteOffset" : 0,
             "target" : 34962
         },
         {
             "buffer" : 0,
-            "byteLength" : 2458272,
-            "byteOffset" : 2458272,
+            "byteLength" : 2458368,
+            "byteOffset" : 2458368,
             "target" : 34962
         },
         {
             "buffer" : 0,
-            "byteLength" : 3277696,
-            "byteOffset" : 4916544,
+            "byteLength" : 3277824,
+            "byteOffset" : 4916736,
             "target" : 34962
         },
         {
             "buffer" : 0,
-            "byteLength" : 1638848,
-            "byteOffset" : 8194240,
+            "byteLength" : 1638912,
+            "byteOffset" : 8194560,
             "target" : 34962
         },
         {
             "buffer" : 0,
-            "byteLength" : 1638848,
-            "byteOffset" : 9833088,
+            "byteLength" : 1638912,
+            "byteOffset" : 9833472,
             "target" : 34962
         },
         {
             "buffer" : 0,
             "byteLength" : 1230336,
-            "byteOffset" : 11471936,
+            "byteOffset" : 11472384,
             "target" : 34963
         }
     ],
@@ -180,7 +157,7 @@
     ],
     "buffers" : [
         {
-            "byteLength" : 12702272,
+            "byteLength" : 12702720,
             "uri" : "log.bin"
         }
     ]
