@@ -1,5 +1,7 @@
 #include "Content.hpp"
 
+#include <glm/glm.hpp>
+using namespace glm;
 
 Content::Content() {
 
@@ -217,8 +219,10 @@ void Content::DrawModelNodes(const pair<GLuint, map<int, GLuint>> &vaoAndEbos, M
 	}
 }
 
-void Content::DrawModel(const pair<GLuint, map<int, GLuint>> &vaoAndEbos, Model &model)
+void Content::DrawModel(const pair<GLuint, map<int, GLuint>> &vaoAndEbos, Model &model, GLuint texture)
 {
+
+	glBindTexture(GL_TEXTURE_2D, texture);
 	glBindVertexArray(vaoAndEbos.first);    
 
 	const Scene &scene = model.scenes[model.defaultScene];

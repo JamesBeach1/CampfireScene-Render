@@ -107,7 +107,7 @@
     "images" : [
         {
             "mimeType" : "image/png",
-            "name" : "treebake.002",
+            "name" : "treebake_002",
             "uri" : "textures/treebake_002.png"
         }
     ],
@@ -115,35 +115,35 @@
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 53824,
+            "count" : 53856,
             "max" : [
-                7.696813106536865,
-                18.29836654663086,
-                9.240301132202148
+                -8.333525657653809,
+                18.14065933227539,
+                -5.7696332931518555
             ],
             "min" : [
-                -9.632837295532227,
-                -0.3338293433189392,
-                -10.986139297485352
+                -28.69731903076172,
+                -0.4915379285812378,
+                -22.801803588867188
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 53824,
+            "count" : 53856,
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 53824,
+            "count" : 53856,
             "type" : "VEC4"
         },
         {
             "bufferView" : 3,
             "componentType" : 5126,
-            "count" : 53824,
+            "count" : 53856,
             "type" : "VEC2"
         },
         {
@@ -186,53 +186,53 @@
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 645888,
+            "byteLength" : 646272,
             "byteOffset" : 0,
             "target" : 34962
         },
         {
             "buffer" : 0,
-            "byteLength" : 645888,
-            "byteOffset" : 645888,
+            "byteLength" : 646272,
+            "byteOffset" : 646272,
             "target" : 34962
         },
         {
             "buffer" : 0,
-            "byteLength" : 861184,
-            "byteOffset" : 1291776,
+            "byteLength" : 861696,
+            "byteOffset" : 1292544,
             "target" : 34962
         },
         {
             "buffer" : 0,
-            "byteLength" : 430592,
-            "byteOffset" : 2152960,
+            "byteLength" : 430848,
+            "byteOffset" : 2154240,
             "target" : 34962
         },
         {
             "buffer" : 0,
             "byteLength" : 161472,
-            "byteOffset" : 2583552,
+            "byteOffset" : 2585088,
             "target" : 34963
         },
         {
             "buffer" : 0,
             "byteLength" : 964,
-            "byteOffset" : 2745024
+            "byteOffset" : 2746560
         },
         {
             "buffer" : 0,
             "byteLength" : 2892,
-            "byteOffset" : 2745988
+            "byteOffset" : 2747524
         },
         {
             "buffer" : 0,
             "byteLength" : 3856,
-            "byteOffset" : 2748880
+            "byteOffset" : 2750416
         },
         {
             "buffer" : 0,
             "byteLength" : 2892,
-            "byteOffset" : 2752736
+            "byteOffset" : 2754272
         }
     ],
     "samplers" : [
@@ -243,7 +243,7 @@
     ],
     "buffers" : [
         {
-            "byteLength" : 2755628,
+            "byteLength" : 2757164,
             "uri" : "tree.bin"
         }
     ]

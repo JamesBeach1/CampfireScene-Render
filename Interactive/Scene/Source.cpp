@@ -93,7 +93,7 @@ auto deltaTime = 0.0f;								// time passed
 auto lastTime = 0.0f;								// Used to calculate Frame rate
 
 Pipeline pipeline;									// Add one pipeline plus some shaders.
-Content content;									// Add one content loader (+drawing).
+Content content[5];									// Add one content loader (+drawing).
 Debugger debugger;									// Add one debugger to use for callbacks ( Win64 - openGLDebugCallback() ) or manual calls ( Apple - glCheckError() ) 
 
 vec3 modelPosition;									// Model position
@@ -239,7 +239,11 @@ void startup()
 	cout << "RENDERER: " << (char *)glGetString(GL_RENDERER) << endl;	
 
 	cout << endl << "Loading content..." << endl;	
-	content.LoadGLTF("assets/tree.gltf");
+	content[0].LoadGLTF("assets/tree.gltf");
+	content[1].LoadGLTF("assets/axe.gltf");
+	content[2].LoadGLTF("assets/log.gltf");
+	content[3].LoadGLTF("assets/campfire.gltf");
+	content[4].LoadGLTF("assets/plane.gltf");
 
 	pipeline.CreatePipeline();
 	pipeline.LoadShaders("shaders/vs_model.glsl", "shaders/fs_model.glsl");
@@ -365,7 +369,11 @@ void render()
 	glUniformMatrix4fv(glGetUniformLocation(pipeline.pipe.program, "view_matrix"), 1, GL_FALSE, &viewMatrix[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(pipeline.pipe.program, "proj_matrix"), 1, GL_FALSE, &projMatrix[0][0]);
 
-	content.DrawModel(content.vaoAndEbos, content.model);
+	content[0].DrawModel(content[0].vaoAndEbos, content[0].model, 1);
+	content[1].DrawModel(content[1].vaoAndEbos, content[1].model, 2);
+	content[2].DrawModel(content[2].vaoAndEbos, content[2].model, 3);
+	content[3].DrawModel(content[3].vaoAndEbos, content[3].model, 4);
+	content[4].DrawModel(content[4].vaoAndEbos, content[4].model, 5);
 	
 	#if defined(__APPLE__)
 		glCheckError();

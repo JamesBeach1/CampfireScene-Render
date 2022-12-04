@@ -21,7 +21,7 @@ class Content {
 		Model model;
 
 		void LoadGLTF(string filename);
-		void DrawModel(const pair<GLuint, map<int, GLuint>> &vaoAndEbos, Model &model);
+		void DrawModel(const pair<GLuint, map<int, GLuint>> &vaoAndEbos, Model &model, GLuint texture);
 
 	virtual ~Content();
 	protected:

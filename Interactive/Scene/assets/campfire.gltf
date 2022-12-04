@@ -18,10 +18,55 @@
             "name" : "Campfire"
         }
     ],
+    "animations" : [
+        {
+            "channels" : [
+                {
+                    "sampler" : 0,
+                    "target" : {
+                        "node" : 0,
+                        "path" : "translation"
+                    }
+                },
+                {
+                    "sampler" : 1,
+                    "target" : {
+                        "node" : 0,
+                        "path" : "rotation"
+                    }
+                },
+                {
+                    "sampler" : 2,
+                    "target" : {
+                        "node" : 0,
+                        "path" : "scale"
+                    }
+                }
+            ],
+            "name" : "Campfire",
+            "samplers" : [
+                {
+                    "input" : 5,
+                    "interpolation" : "LINEAR",
+                    "output" : 6
+                },
+                {
+                    "input" : 5,
+                    "interpolation" : "LINEAR",
+                    "output" : 7
+                },
+                {
+                    "input" : 5,
+                    "interpolation" : "LINEAR",
+                    "output" : 8
+                }
+            ]
+        }
+    ],
     "materials" : [
         {
             "doubleSided" : true,
-            "name" : "Material",
+            "name" : "Material.004",
             "pbrMetallicRoughness" : {
                 "baseColorTexture" : {
                     "index" : 0
@@ -39,9 +84,10 @@
                     "attributes" : {
                         "POSITION" : 0,
                         "NORMAL" : 1,
-                        "TEXCOORD_0" : 2
+                        "TANGENT" : 2,
+                        "TEXCOORD_0" : 3
                     },
-                    "indices" : 3,
+                    "indices" : 4,
                     "material" : 0
                 }
             ]
@@ -64,62 +110,124 @@
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 45715,
+            "count" : 55817,
             "max" : [
-                -0.17578411102294922,
-                2.7622475624084473,
-                3.2940826416015625
+                -12.592358589172363,
+                1.2356293201446533,
+                4.384368896484375
             ],
             "min" : [
-                -10.349530220031738,
-                -1.0213967561721802,
-                -6.851484775543213
+                -17.09712791442871,
+                -0.45689883828163147,
+                -0.17781448364257812
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 45715,
+            "count" : 55817,
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 45715,
-            "type" : "VEC2"
+            "count" : 55817,
+            "type" : "VEC4"
         },
         {
             "bufferView" : 3,
+            "componentType" : 5126,
+            "count" : 55817,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 4,
             "componentType" : 5123,
             "count" : 152688,
             "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 5,
+            "componentType" : 5126,
+            "count" : 241,
+            "max" : [
+                10.041666666666666
+            ],
+            "min" : [
+                0.041666666666666664
+            ],
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 6,
+            "componentType" : 5126,
+            "count" : 241,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 7,
+            "componentType" : 5126,
+            "count" : 241,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 8,
+            "componentType" : 5126,
+            "count" : 241,
+            "type" : "VEC3"
         }
     ],
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 548580,
+            "byteLength" : 669804,
             "byteOffset" : 0,
             "target" : 34962
         },
         {
             "buffer" : 0,
-            "byteLength" : 548580,
-            "byteOffset" : 548580,
+            "byteLength" : 669804,
+            "byteOffset" : 669804,
             "target" : 34962
         },
         {
             "buffer" : 0,
-            "byteLength" : 365720,
-            "byteOffset" : 1097160,
+            "byteLength" : 893072,
+            "byteOffset" : 1339608,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 446536,
+            "byteOffset" : 2232680,
             "target" : 34962
         },
         {
             "buffer" : 0,
             "byteLength" : 305376,
-            "byteOffset" : 1462880,
+            "byteOffset" : 2679216,
             "target" : 34963
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 964,
+            "byteOffset" : 2984592
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 2892,
+            "byteOffset" : 2985556
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 3856,
+            "byteOffset" : 2988448
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 2892,
+            "byteOffset" : 2992304
         }
     ],
     "samplers" : [
@@ -130,7 +238,7 @@
     ],
     "buffers" : [
         {
-            "byteLength" : 1768256,
+            "byteLength" : 2995196,
             "uri" : "campfire.bin"
         }
     ]
