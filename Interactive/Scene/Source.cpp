@@ -78,12 +78,24 @@ GLFWwindow *window; 								// Keep track of the window
 auto windowWidth = 800;								// Window width					
 auto windowHeight =800;								// Window height
 auto running(true);							  		// Are we still running our main loop
+
 mat4 projMatrix;							 		// Our Projection Matrix
 vec3 cameraPosition = vec3(0.0f, 0.0f, 5.0f);		// Where is our camera
 vec3 cameraFront = vec3(0.0f, 0.0f, -1.0f);			// Camera front vector
 vec3 cameraUp = vec3(0.0f, 1.0f, 0.0f);				// Camera up vector
 float cameraSpeed = 0.05f;							// Camera movement speed
 float cameraRotateSensitivity = 100.0f;				// Camera Rotation Speed
+
+glm::vec4 lightColour;								// light variables
+glm::vec3 lightPosition;							
+glm::mat4 lightMatrix;
+glm::vec4 diffuseColour;
+glm::vec4 specularColour;
+float diffuseConstant;
+float ambientConstant;
+float specularConstant;
+float shininessConstant;
+
 bool mouseHeld = false;								// Is LMB held down
 auto aspect = (float)windowWidth / (float)windowHeight;	// Window aspect ration
 auto fovy = 45.0f;									// Field of view (y axis)
@@ -93,7 +105,7 @@ auto deltaTime = 0.0f;								// time passed
 auto lastTime = 0.0f;								// Used to calculate Frame rate
 
 Pipeline pipeline;									// Add one pipeline plus some shaders.
-Content content[5];									// Add one content loader (+drawing).
+Content content[5];									// Add array of content loaders (+drawing).
 Debugger debugger;									// Add one debugger to use for callbacks ( Win64 - openGLDebugCallback() ) or manual calls ( Apple - glCheckError() ) 
 
 vec3 modelPosition;									// Model position
@@ -245,8 +257,29 @@ void startup()
 	content[3].LoadGLTF("assets/campfire.gltf");
 	content[4].LoadGLTF("assets/plane.gltf");
 
+	// initialise light related variables, colour set to orange
+	lightColour = glm::vec4(1.0f, 0.647f, 0.0f, 1.0f);
+	lightPosition = glm::vec3(-17.6f, 2.0f, 2.0f);
+	diffuseColour = lightColour;
+	specularColour = lightColour;
+	diffuseConstant = 1.0f;
+	ambientConstant = 0.1f;
+	specularConstant = 0.1f;
+	shininessConstant = 1.0f;
+
+	// load shaders
 	pipeline.CreatePipeline();
-	pipeline.LoadShaders("shaders/vs_model.glsl", "shaders/fs_model.glsl");
+	pipeline.LoadShaders("shaders/vs_model.glsl", "shaders/fs_lighting.glsl");
+
+	// send light information to shaders in uniforms, this information is static therefore only needs to be sent once
+	glUniform4f(glGetUniformLocation(pipeline.pipe.program, "lightColour"), lightColour.x, lightColour.y, lightColour.z, lightColour.w);
+	glUniform3f(glGetUniformLocation(pipeline.pipe.program, "lightPosition"), lightPosition.x, lightPosition.y, lightPosition.z);
+	glUniform4f(glGetUniformLocation(pipeline.pipe.program, "specularColour"), specularColour.x, specularColour.y, specularColour.z, specularColour.w);
+	glUniform4f(glGetUniformLocation(pipeline.pipe.program, "diffuseColour"), diffuseColour.x, diffuseColour.y, diffuseColour.z, diffuseColour.w);
+	glUniform1f(glGetUniformLocation(pipeline.pipe.program, "diffuseConstant"), diffuseConstant);
+	glUniform1f(glGetUniformLocation(pipeline.pipe.program, "ambientConstant"), ambientConstant);
+	glUniform1f(glGetUniformLocation(pipeline.pipe.program, "specularConstant"), specularConstant);
+	glUniform1f(glGetUniformLocation(pipeline.pipe.program, "shininessConstant"), shininessConstant);
 
 	// Start from the centre
 	modelPosition = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -336,8 +369,8 @@ void render()
 	glViewport(0, 0, windowWidth, windowHeight);
 
 	// Clear colour buffer
-	glm::vec4 inchyraBlue = glm::vec4(0.345f, 0.404f, 0.408f, 1.0f);
-	glm::vec4 backgroundColor = inchyraBlue;
+	glm::vec4 black = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+	glm::vec4 backgroundColor = black;
 	glClearBufferfv(GL_COLOR, 0, &backgroundColor[0]);
 
 	// Clear deep buffer
@@ -365,10 +398,16 @@ void render()
 
 	glm::mat4 mv_matrix = viewMatrix * modelMatrix;
 
+	lightMatrix = glm::mat4(1.0f);
+	lightMatrix = glm::translate(lightMatrix, lightPosition);
+
 	glUniformMatrix4fv(glGetUniformLocation(pipeline.pipe.program, "model_matrix"), 1, GL_FALSE, &modelMatrix[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(pipeline.pipe.program, "view_matrix"), 1, GL_FALSE, &viewMatrix[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(pipeline.pipe.program, "proj_matrix"), 1, GL_FALSE, &projMatrix[0][0]);
+	// camera position sent to shaders, camera is interactive therefore updated every tick
+	glUniform3f(glGetUniformLocation(pipeline.pipe.program, "cameraPosition"), cameraPosition.x, cameraPosition.y, cameraPosition.z);
 
+	// load models along with their GLuint ID
 	content[0].DrawModel(content[0].vaoAndEbos, content[0].model, 1);
 	content[1].DrawModel(content[1].vaoAndEbos, content[1].model, 2);
 	content[2].DrawModel(content[2].vaoAndEbos, content[2].model, 3);
@@ -407,6 +446,11 @@ void ui()
 	if (ImGui::Begin("Info", nullptr, window_flags)) {
 		ImGui::Text("About: 3D Graphics and Animation 2022"); // ImGui::Separator();
 		ImGui::Text("Performance: %.3fms/Frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+
+		// add camera and light position info for testing
+		ImGui::Text("Camera Position: %.3fx, %.3fy, %.3fz, ", cameraPosition.x, cameraPosition.y, cameraPosition.z);
+		ImGui::Text("Light Position: %.3fx, %.3fy, %.3fz, ", lightPosition.x, lightPosition.y, lightPosition.z);
+
 		ImGui::Text("Pipeline: %s", pipeline.pipe.error?"ERROR":"OK");
 	}
 	ImGui::End();
