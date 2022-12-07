@@ -80,7 +80,7 @@ auto windowHeight =800;								// Window height
 auto running(true);							  		// Are we still running our main loop
 
 mat4 projMatrix;							 		// Our Projection Matrix
-vec3 cameraPosition = vec3(0.0f, 0.0f, 5.0f);		// Where is our camera
+vec3 cameraPosition = vec3(-17.5f, 5.0f, 33.0f);		// Where is our camera
 vec3 cameraFront = vec3(0.0f, 0.0f, -1.0f);			// Camera front vector
 vec3 cameraUp = vec3(0.0f, 1.0f, 0.0f);				// Camera up vector
 float cameraSpeed = 0.05f;							// Camera movement speed
@@ -88,7 +88,6 @@ float cameraRotateSensitivity = 100.0f;				// Camera Rotation Speed
 
 glm::vec4 lightColour;								// light variables
 glm::vec3 lightPosition;							
-glm::mat4 lightMatrix;
 glm::vec4 diffuseColour;
 glm::vec4 specularColour;
 float diffuseConstant;
@@ -308,7 +307,7 @@ void update()
 	if (keyStatus[GLFW_KEY_W]) cameraPosition += cameraSpeed * cameraFront;
 	if (keyStatus[GLFW_KEY_S]) cameraPosition -= cameraSpeed * cameraFront;
 	if (keyStatus[GLFW_KEY_A]) cameraPosition -= cameraSpeed * glm::normalize(glm::cross(cameraFront, cameraUp));
-	if (keyStatus[GLFW_KEY_D]) cameraPosition += cameraSpeed * glm::normalize(glm::cross(cameraFront, cameraUp));;
+	if (keyStatus[GLFW_KEY_D]) cameraPosition += cameraSpeed * glm::normalize(glm::cross(cameraFront, cameraUp));
 	if (keyStatus[GLFW_KEY_SPACE]) cameraPosition.y += cameraSpeed;
 	if (keyStatus[GLFW_KEY_LEFT_CONTROL]) cameraPosition.y -= cameraSpeed;
 
@@ -397,9 +396,6 @@ void render()
 	modelMatrix = glm::scale(modelMatrix, glm::vec3(1.2f, 1.2f, 1.2f));
 
 	glm::mat4 mv_matrix = viewMatrix * modelMatrix;
-
-	lightMatrix = glm::mat4(1.0f);
-	lightMatrix = glm::translate(lightMatrix, lightPosition);
 
 	glUniformMatrix4fv(glGetUniformLocation(pipeline.pipe.program, "model_matrix"), 1, GL_FALSE, &modelMatrix[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(pipeline.pipe.program, "view_matrix"), 1, GL_FALSE, &viewMatrix[0][0]);
