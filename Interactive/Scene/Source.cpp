@@ -95,6 +95,12 @@ float ambientConstant;
 float specularConstant;
 float shininessConstant;
 
+glm::vec3 flashlightPosition;						// flashlight variables
+glm::vec4 flashlightColour;
+glm::vec4 flashlightDirection;
+int isFlashlightOn;
+bool keyHeld = false;
+
 bool mouseHeld = false;								// Is LMB held down
 auto aspect = (float)windowWidth / (float)windowHeight;	// Window aspect ration
 auto fovy = 45.0f;									// Field of view (y axis)
@@ -266,6 +272,10 @@ void startup()
 	specularConstant = 0.1f;
 	shininessConstant = 1.0f;
 
+	flashlightColour = glm::vec4(1.0f);
+	flashlightPosition = cameraPosition;
+	isFlashlightOn = 0;
+
 	// load shaders
 	pipeline.CreatePipeline();
 	pipeline.LoadShaders("shaders/vs_model.glsl", "shaders/fs_lighting.glsl");
@@ -279,6 +289,10 @@ void startup()
 	glUniform1f(glGetUniformLocation(pipeline.pipe.program, "ambientConstant"), ambientConstant);
 	glUniform1f(glGetUniformLocation(pipeline.pipe.program, "specularConstant"), specularConstant);
 	glUniform1f(glGetUniformLocation(pipeline.pipe.program, "shininessConstant"), shininessConstant);
+
+	glUniform4f(glGetUniformLocation(pipeline.pipe.program, "flashlightColour"), flashlightColour.x, flashlightColour.y, flashlightColour.z, flashlightColour.w);
+	glUniform3f(glGetUniformLocation(pipeline.pipe.program, "flashlightDirection"), cameraFront.x, cameraFront.y, cameraFront.z);
+	glUniform1i(glGetUniformLocation(pipeline.pipe.program, "isFlashlightOn"), isFlashlightOn);
 
 	// Start from the centre
 	modelPosition = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -357,6 +371,22 @@ void update()
 
 	if (keyStatus[GLFW_KEY_R]) pipeline.ReloadShaders();
 
+	// when the F key is pressed, toggle the flashlight, keyHeld is used to prevent key spam
+	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS && !keyHeld){
+		keyHeld = true;
+		if(isFlashlightOn == 0){
+			isFlashlightOn = 1;
+		}
+		else{
+			isFlashlightOn = 0;
+		}
+	}
+	else if(glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE){
+		keyHeld = false;
+	}
+
+	flashlightPosition = cameraPosition;
+
 	// Start the Dear ImGui frame
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
@@ -402,6 +432,9 @@ void render()
 	glUniformMatrix4fv(glGetUniformLocation(pipeline.pipe.program, "proj_matrix"), 1, GL_FALSE, &projMatrix[0][0]);
 	// camera position sent to shaders, camera is interactive therefore updated every tick
 	glUniform3f(glGetUniformLocation(pipeline.pipe.program, "cameraPosition"), cameraPosition.x, cameraPosition.y, cameraPosition.z);
+	glUniform3f(glGetUniformLocation(pipeline.pipe.program, "flashlightPosition"), flashlightPosition.x, flashlightPosition.y, flashlightPosition.z);
+	glUniform3f(glGetUniformLocation(pipeline.pipe.program, "flashlightDirection"), cameraFront.x, cameraFront.y, cameraFront.z);
+	glUniform1i(glGetUniformLocation(pipeline.pipe.program, "isFlashlightOn"), isFlashlightOn);
 
 	// load models along with their GLuint ID
 	content[0].DrawModel(content[0].vaoAndEbos, content[0].model, 1);
@@ -446,6 +479,7 @@ void ui()
 		// add camera and light position info for testing
 		ImGui::Text("Camera Position: %.3fx, %.3fy, %.3fz, ", cameraPosition.x, cameraPosition.y, cameraPosition.z);
 		ImGui::Text("Light Position: %.3fx, %.3fy, %.3fz, ", lightPosition.x, lightPosition.y, lightPosition.z);
+		ImGui::Text("Flashlight Position: %.3fx, %.3fy, %.3fz, ", flashlightPosition.x, flashlightPosition.y, flashlightPosition.z);
 
 		ImGui::Text("Pipeline: %s", pipeline.pipe.error?"ERROR":"OK");
 	}
